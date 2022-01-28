@@ -105,7 +105,7 @@
 							</inputSpec>
 							<generatorName>spring</generatorName>
 							<apiPackage>com.shah.project.hotel.reservation.api</apiPackage>
-							<modelPackage>com.shah.project.hotel.reservation.model</modelPackage>
+							<modelPackage>com.shah.project.hotel.reservation.entity</modelPackage>
 							<library>spring-boot</library>
 							<generateSupportingFiles>true</generateSupportingFiles>
 							<generatorName>spring</generatorName>
