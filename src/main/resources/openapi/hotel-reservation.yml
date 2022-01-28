@@ -1,0 +1,213 @@
+openapi: 3.0.0
+info:
+  title: Hotel Management - Reservation Service API Documentation
+  description: 'Api Documentation for Hotel Management - Reservation Service'
+  version: v0
+  contact: {}
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0
+# -- End of Info Object --
+
+# Tags Object
+tags:
+  - name: Reservation
+    description: Manage the Customer's Reservations
+# -- End of Tags Object --
+
+# Components Object
+components:
+  schemas:
+    Reservation:
+      required:
+        - customerId
+        - reservationId
+      type: object
+      properties:
+        reservationId:
+          type: number
+          description: The Reservation Identifier.
+          example: '12345678'
+        customerId:
+          type: string
+          description: The Customer Identifier.
+          example: '234324324324'
+        customerEmail:
+          type: string
+        cardNumber:
+          type: string
+        reservationBookingDate:
+          type: string
+          format: date-time
+        reservationArriveDate:
+          type: string
+          format: date-time
+        reservationDepartDate:
+          type: string
+          format: date-time
+        hotelId:
+          type: string
+        roomType:
+          type: string
+          enum:
+            - SINGLE
+            - TWIN
+            - DOUBLE
+            - SUITE
+    StatusReport:
+      required:
+        - text
+        - code
+      properties:
+        text:
+          type: string
+        code:
+          type: string
+    Error:
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+# -- End of Components Object --
+
+# Paths Object
+paths:
+  /hotel-mgt-reservation/v1/reservations:
+    post:
+      tags:
+        - "Reservation"
+      summary: "Creates the reservation object to Reservation tables"
+      operationId: "createReservation"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Reservation"
+        required: true
+      responses:
+        "201":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Reservation"
+        "400":
+          description: "Indicates a parameter was passed in the wrong format or that\
+            \ it has an invalid value."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: "The user is not authorized for this request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: "Indicates a resource was not found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: "A server-side failure occurred"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /hotel-mgt-reservation/v1/reservations/{reservationId}:
+    get:
+      tags:
+        - "Reservation"
+      summary: "Get a specific customer's reservation from reservation table"
+      operationId: "getReservation"
+      parameters:
+        - name: "reservationId"
+          description: "The Reservation Identifier."
+          in: "path"
+          required: true
+          schema:
+            type: "number"
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Reservation"
+        "400":
+          description: "Indicates a parameter was passed in the wrong format or that\
+            \ it has an invalid value."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: "The user is not authorized for this request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: "Indicates a resource was not found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: "A server-side failure occurred"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /actuator/heartbeat:
+    get:
+      tags:
+        - "HeartBeat"
+      summary: "Provides information on current server status"
+      operationId: "getHeartbeat"
+      responses:
+        "200":
+          description: "Expected response to a valid request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusReport"
+        "400":
+          description: "Indicates a parameter was passed in the wrong format or that\
+            \ it has an invalid value."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: "The user is not authorized for this request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: "Indicates a resource was not found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: "A server-side failure occurred"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+# -- End of Paths Object --
+
+# Step 2a: Add Server Object below
+
+# -- End of Step 2a --
+
+# Step 2b: Add externalDocs Object below
+
