@@ -3,7 +3,7 @@ info:
   title: Hotel Management - Reservation Service API Documentation
   description: 'Api Documentation for Hotel Management - Reservation Service'
   version: v0
-  contact: {}
+  contact: { }
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0

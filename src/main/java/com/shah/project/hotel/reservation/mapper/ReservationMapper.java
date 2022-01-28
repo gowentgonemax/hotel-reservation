@@ -26,7 +26,7 @@ public class ReservationMapper {
             if (domainObj.getReservationDepartDate() != null) {
                 entityObj.setReservationDepartDate(Timestamp.valueOf(domainObj.getReservationDepartDate().atZoneSameInstant(ZoneOffset.UTC).toLocalDateTime()));
             }
-            if(domainObj.getReservationBookingDate()!=null){
+            if (domainObj.getReservationBookingDate() != null) {
                 entityObj.setReservationBookingDate(Timestamp.valueOf(domainObj.getReservationBookingDate().atZoneSameInstant(ZoneOffset.UTC).toLocalDateTime()));
             }
             entityObj.setCardNumber(domainObj.getCardNumber());
@@ -38,6 +38,7 @@ public class ReservationMapper {
         }
         return entityObj;
     }
+
     public Reservation convertToDomainObj(ReservationEntity entityObj) {
         Reservation domainObj = new Reservation();
         if (entityObj != null) {
@@ -50,7 +51,7 @@ public class ReservationMapper {
             if (entityObj.getReservationDepartDate() != null) {
                 domainObj.setReservationDepartDate(OffsetDateTime.ofInstant(Instant.ofEpochMilli(entityObj.getReservationDepartDate().getTime()), ZoneId.of("UTC")));
             }
-            if(entityObj.getReservationBookingDate()!=null){
+            if (entityObj.getReservationBookingDate() != null) {
                 domainObj.setReservationBookingDate(OffsetDateTime.ofInstant(Instant.ofEpochMilli(entityObj.getReservationBookingDate().getTime()), ZoneId.of("UTC")));
             }
             domainObj.setCardNumber(entityObj.getCardNumber());
